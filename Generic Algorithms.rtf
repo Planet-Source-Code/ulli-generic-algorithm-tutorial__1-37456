@@ -1,0 +1,94 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fcharset2 Symbol;}}
+\viewkind4\uc1\pard\b\f0\fs24 Generic Algorithms\par
+\b0\fs20\par
+Generic Algorithms (GA) are used to arrive at an optimal solution for problems which cannot be solved by mathmatical rules or formulae. A GA simulates the natural evolution process by selecting and breeding the fittest individuals. According to Darwin's Evolution Theory the "fittest" are those which are best adapted to a competitive and possibly hostile environment. Unless singled out by selection individuals in a Generic Algorithm are basically immortal.\par
+\par
+A GA basically perfroms these three steps over and over again, each cycle being counted as one generation:\par
+\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li568 Fitness Evaluation: Each individual is tested for fitness and the fittest are permitted to survive. \par
+\pard\fi-284\li568\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li568 Adolescence and fertility: An individual surviving fitness evaluation for a preset number of generations is deemed to be fertile and allowed to reproduce\par
+\pard\fi-284\li568\par
+\pard{\pntext\f1\'B7\tab}{\*\pn\pnlvlblt\pnf1\pnindent0{\pntxtb\'B7}}\fi-284\li568 Mating: Two or more parents are randomly or deliberately selected from among the fertile individuals to mate and produce new offspring \par
+\pard\par
+\par
+A Generic Algorithm uses these terms and parameters:\par
+\par
+\par
+\ul\b Population size\par
+\ulnone\b0\par
+The population size governs the diversity of the individuals. To minimize inbreeding the population size should not be too small, usual values are in the range between 50 and 500.\par
+\par
+\par
+ \ul\b Max Generations\par
+\ulnone\b0\par
+This value represents the number of generations which will be created before the system stops and returns the result. This is the maximum time which the system is permitted to arrive at a solution. The range may be between 50 and 300, it is suggested to start with a smaller number and gradually increase it until the population fitness has had time enough to converge. A perfect fit of an individual to the solution however should terminate evaluation immediately. Another termination criterion might be the survival of an idividual for a prespecified numer of generations, this being an indication that a better solution is not in sight. The initial generation is created randomly.\par
+\par
+\par
+\ul\b The Individual\par
+\b0\par
+\ulnone The properties of an individual are expressed by a number of genes, the total of the genes being called the genom or the chromosom. How properties are coded in the genom is mainly a question of the type of problem to solve.\par
+\par
+\b\i Age\b0\i0  simply counts the number of generations lifetime for the individual\par
+\par
+\b\i Properties\b0\i0  are encoded by some means related to the problem in question:\par
+\par
+\i Binary Encoding \i0 is used most commonly, because each bit can represent the presence or absence of a property. It results in a large number of different chromosomes, however it is sometimes not natural for many problems and corrections my be required after crossover and / or mutation (see below). One example for this type of encoding is the Knappsack-Problem (Knappsack is a German family name, "knapp" also means limited or restricted): there are things with a given value and size; the knappsack has a given capacity. The problem is to select things to maximize the value of the knappsack contents while not exceeding it's capacity. Each bit then simply represents whether the corresponding thing is in the sack or not.\par
+\par
+\i Permutation Encoding \i0 can be used in ordering problems, such as the Travelling Salesman Problem: A salesman has to visit n cities where the distance between all possible pairs of cities is known; arrange the journey (the sequence in which to visit the cities) to minimize the distance travelled. Here every chromosom is a sequence of numbers, ie the sequence of cities for the travelling salesman's journey. Corrections after crossover and mutation are almost certainly necessary to keep the chromosome consistent (ie. to represent a real sequence without omissions and duplicates).\par
+\par
+\i Value Encoding \i0 should be used to solve problems where some complicated value, such as real numbers, are used. Every chromosome is a sequence of numbers or values relating to a real, complicated object. A type if problem could be the design of a mechanical part to minimize the weight while at the same time maintaining it's structural stability. Each number would then represent the object's dimesions at a crucial point.\par
+\par
+\i Tree Encoding \i0 uses a type of encoding where each chromosome represents a tree with nodes and leaves such as steps necessary to solve a problen, together with the precedence and alternatives of these steps. \par
+\par
+\ul\b\par
+Mating and Crossover\par
+\par
+\ulnone\b0 During mating two or more chromosomes are combined to produce a new offspring. Parts of the chromosomes from each parent are taken to construct the genom of the offspring.\par
+\par
+\b\i\par
+Selection of Parents \b0\i0  \par
+\par
+Parents may be selected randomly from among the surviving population, or they may be selected depending on their fitness.\par
+\par
+\par
+\b\i Crossover\b0\i0\par
+\par
+Crossover is the process of combining parent chromosomes to produce offspring. Several methods are presented:\par
+\par
+\i Single Point Crossover \i0 - one (ore more, depending on number of parents) crossover-point is selected randomly and the new genom is created by copying the genom segments between begin, crossover-point(s), and end from each participating parent into the genom of the offspring.\par
+\par
+\i Multiple Point Crossover \i0 - several crossover points are selected randomly and the new genom is constructed by successively copying the genom segments of the participating parents in turn.\par
+\par
+\i Uniform Crossover \i0 - the offspring genom is created by randomly copying the genes of the participating parents.\par
+\par
+\i Arithmetic Crossover \i0 - the offspring genom is created by applying some arithmetic or logic function to the participating parents' genoms and the function result represents the new offspring genom.\par
+\par
+\ul\b\par
+Mutation\ulnone\b0\par
+\par
+To prevent a population from converging and settling at a sub-optimal point in the solution space, mutation introduces an element of divergence in a converging population and thus avoids settlement at a local maximum whis is a common problem in stochastic algorithms. During mutation one ore more randomly selected genes of the chromosome are modified, this could occur during the production of new offspring or during the adolescent phase, before reaching fertility. The mutation rate should be very low to achive a balance between convergence and divergence, that is it should not disturb a covergence at the optimum, but still be high enough to send individuals back into the solution space in search for another optimum.\par
+\par
+\ul\b\par
+Fitness Evaluation\ulnone\b0\par
+\par
+The fitness of every individual in the population is evaluated by some kind of evaluation technique which depends on the problem in question.\par
+ \par
+\par
+\ul\b Death\ulnone\b0\par
+\par
+One of three algorithms may then be used to select those to survive:\par
+\b\i\par
+\b0 Roulette Wheel Selection \i0 - the fittest individuals are assigned a value which gives them a higher chance to be selected for survival, the less fit individuals are given a value which has less chances to be selected. Then the wheel is turned for each individual and depending on the outcome the individual will either survive or die.\par
+\par
+\i Rank Selection \i0 - the fittest idividual is given a value of [population size] and the less fit individuals are given decreasing values down to 1. A threshold value then determines which individuals are extinct. \par
+\par
+\i Average Selection\i0  - first the average fitness of the whole population is evaluated and factor is then used to evaluate each individual fitness based on this average.\par
+\par
+The dead idividuals are deleted from the population. This may eventually lead to overpopulation or extinction if too few or too may individuals die. The death algorithm should therefore be designed in one of two ways:\par
+\par
+\i Stable Population Size:\i0  Only so many individuals die as can be produced during the next mating cycle; the population size is kept at a preset value\par
+\par
+\i Variable Population Size:\i0  The death algoritm self-adjusts to prevent overpopulation or extinction; this will almost certainly result in a varying population size\par
+}
+ 
